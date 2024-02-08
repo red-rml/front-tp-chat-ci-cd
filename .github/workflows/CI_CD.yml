@@ -19,6 +19,10 @@ jobs:
       - name: Build my Nodejs Docker image
         run: docker image build --tag="${IMAGE_NAME}" ./
 
+      - uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: Dockerfile
+
       # - name: Linting
       #   run: docker container run "${IMAGE_NAME}" npm run lint
 
