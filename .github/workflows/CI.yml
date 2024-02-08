@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - "*"
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    env:
+      IMAGE_NAME: "mynode:20"
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Build my Nodejs Docker image
+        run: docker image build --tag="${IMAGE_NAME}" ./
+
+      - uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: Dockerfile
+
+      # - name: Linting
+      #   run: docker container run "${IMAGE_NAME}" npm run lint
+
+      # - name: Testing
+      #   run: docker container run "${IMAGE_NAME}" npm test

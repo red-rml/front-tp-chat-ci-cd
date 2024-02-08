@@ -1,7 +1,6 @@
-name: CI/CD
+name: CD
 
 on:
-  pull_request:
   push:
     branches:
       - main
@@ -34,7 +33,7 @@ jobs:
   deploy:
     runs-on: ubuntu-22.04
     needs: build
-    if: github.event_name == 'pull_request' && github.event.pull_request.base.ref == 'main' && needs.build.result == 'success'
+    if: github.event_name == 'pull_request' && needs.build.result == 'success'
 
     steps:
       - name: Checkout Repository
