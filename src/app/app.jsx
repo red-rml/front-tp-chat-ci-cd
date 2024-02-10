@@ -7,7 +7,7 @@ import ReactFlagsSelect from 'react-flags-select';
 
 const socket = io('http://localhost:4000');
 
-export default function Home() {
+export default function App() {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
   const [selectLng, setSelectLng] = useState('FR');
