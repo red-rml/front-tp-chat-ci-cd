@@ -33,7 +33,7 @@ jobs:
   deploy:
     runs-on: ubuntu-22.04
     needs: build
-    if: github.event_name == 'pull_request' && needs.build.result == 'success'
+    if: needs.build.result == 'success'
 
     steps:
       - name: Checkout Repository
