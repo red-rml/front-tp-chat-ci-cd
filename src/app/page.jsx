@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
 // import 'node_modules/flag-icons/css/flag-icons.min.css';
 import ReactFlagsSelect from 'react-flags-select';
