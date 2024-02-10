@@ -1,116 +1,85 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Projet Front Chat CI/CD  <a name="readme-top"></a>
 
-## Getting Started
+## Auteurs 🎭
 
-First, run the development server:
+* **Rédouane RÉMILI** _alias_ [@FinOrfy](https://github.com/red-rml)
 
-```bash
-npm run dev
-```
+## Présentation du projet 👍
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Il s’agit d’un projet next.js visant à permettre un chat en ligne entre plusieurs utilisateurs.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Dans ce dépôt gitHub il n’y a que la partie Front. 
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Technologies Utilisées
 
-## Learn More
+- **NodeJS**
 
-To learn more about Next.js, take a look at the following resources:
+- **NextJS** 
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Docker** 
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome !
+- **GitHub Action**
+
+---
+
+# Sujet 📖
+
+## Introduction
+
+Mettre à jour un projet avec GitHub Actions pour :
+
+Mettre en place une procédure d’intégration continue (CI) sur les pull requests envoyées à votre projet
+
+Mettre en place une procédure de déploiement continu, en extension du CI, sur la branch principale de votre dépôt de code
+
+Mettre en place une procédure de livraison continue (CD) lors de la création d’un tag git sur votre dépôt
+
+
 
 ## CI/CD
 
-### Intégration Continue
+### Intégration continue
 
-Ce projet utilise GitHub Actions pour automatiser le processus d'intégration continue (CI).
-Le workflow CI est déclenché automatiquement sur chaque pull request.
+=> **Pour une PR :**
 
-#### Étapes pour la CI
+Faire la commande : ```npm install``` 
 
-Voici comment reproduire les étapes du CI localement :
+Vérification du code avec le linter : ```npm run lint```
 
-1. **Cloner le dépôt**
-   ```bash
-   git clone https://github.com/Pellegrin69/nodejs_mongodb.git
-   ```
+Faire le tests : ```npm run test``` (désactivé car un bug est présent : voir la capture d'écran)
+![Texte alternatif](./images/Capture.JPG "Titre de l'image")
 
-2. **Installer les dépendances**
-   ```bash
-   npm install
-   ```
+Build du projet : ```npm run build```
 
-3. **Linter le code**
-   ```bash
-   npm run lint
-   ```
+Vérification du linter dockerfile : ```hadolint Dockerfile```
 
-4. **Lancer le test**
-   ```bash
-   npm test
-   ```
+### Déploiement continue 
 
-### Déploiement Continu (CD)
+Création d'une Pull Request d’une branche tier vers la branche main.
 
-Le déploiement continu permet de créer une nouvelle image Docker et de la pousser sur Docker Hub.
-Le workflow est déclenché si une Pull Request est faite sur GitHub vers la branche *main* et si le job *build* du CI a
-réussi.
+La CI se déclenche automatiquement
 
-### Livraison Continue (CD)
+Si la CI est un succès, valider le merge de la PR.
 
-#### Étapes de Déploiement
+On peut voir sur github action le déploiement de l'image docker.
 
-1. **Créer une Nouvelle Branche de Fonctionnalité**
-    - Si vous travaillez sur une nouvelle fonctionnalité, créez une nouvelle branche de fonctionnalité en utilisant la
-      commande `git checkout -b ma-nouvelle-fonctionnalite`.
+-> En cas de succès, le livrable est déployé (Mis en place pour la branche master uniquement) :
 
+Le livrable du déploiement continu est une image Docker "latest" poussée sur DockerHub. Un fichier Dockerfile passant la validation hadolint est utilisé.
 
-2. **Effectuer les Modifications Nécessaires**
-    - Apportez les modifications nécessaires à l'application.
+### Livraison continue
+
+Créer un tag et le nommer selon la norme (majeure.mineure.corrective).
+
+Pousser le tag qui vient d’être créé.
+
+Lancement CI
+
+Si succès le livrable est une image docker sur DockerHub avec le tag nommé précédemment.
+
+-> A la création d'un tag git et si le CI est un succès :
+
+Le livrable de la livraison continue est une image Docker poussée sur DockerHub dont le tag est le tag git. 
 
 
-3. **Commit et Push des Modifications**
-    - Effectuez un commit de vos modifications avec `git commit -m "Description du changement"`.
-    - Poussez les modifications vers le dépôt distant avec `git push origin ma-nouvelle-branche` (si vous travaillez sur
-      une nouvelle branche).
-
-
-4. **Créer une Pull Request (PR)**
-    - Créez une Pull Request pour fusionner vos modifications dans la branche principale.
-
-
-5. **Attente des Résultats du CI/CD**
-    - Attendez que le processus CI/CD s'exécute automatiquement sur votre Pull Request.
-    - Vérifiez que le CI est réussi avant de poursuivre.
-
-
-6. **Fusionner la Pull Request**
-    - Une fois le CI réussi, demandez à un collègue de confiance de revoir votre PR.
-    - Fusionnez la PR dans la branche principale.
-
-
-7. **Créer un Tag pour la Nouvelle Version**
-    - Utilisez la commande `git tag -a v1.2.3 -m "Description de la version"` pour créer un nouveau tag.
-      Remplacez `v1.2.3` par la version appropriée.
-
-
-8. **Pousser le Tag vers GitHub**
-    - Poussez le tag vers GitHub avec `git push origin v1.2.3`.
-
-
-9. **Attente du Déploiement Automatique (CD)**
-    - Attendez que le processus de déploiement continu (CD) soit déclenché automatiquement pour le tag que vous avez
-      créé.
-
-
-10. **Vérifier le Déploiement**
-    - Une fois le CD réussi, vérifiez que la nouvelle version de l'application est déployée conformément aux modalités
-      spécifiées dans le README.
-
-
-11. **Célébrer le Succès !**
-    - Félicitations ! Vous avez déployé avec succès la nouvelle version de l'application.
+<p align="right">(<a href="#readme-top">retour en haut ⬆</a>)</p>

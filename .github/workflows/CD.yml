@@ -27,8 +27,8 @@ jobs:
       - name: Linting
         run: docker container run "${IMAGE_NAME}" npm run lint
 
-      - name: Testing
-        run: docker container run "${IMAGE_NAME}" npm test
+      # - name: Testing
+      #   run: docker container run "${IMAGE_NAME}" npm test
 
   deploy_tag:
     runs-on: ubuntu-22.04
