@@ -5,13 +5,13 @@ on:
     branches:
       - main
     tags:
-      - "*"
+      - '*'
 
 jobs:
   build:
     runs-on: ubuntu-22.04
     env:
-      IMAGE_NAME: "mynode:20"
+      IMAGE_NAME: 'mynode:20'
 
     steps:
       - name: Checkout Repository
@@ -24,8 +24,8 @@ jobs:
         with:
           dockerfile: Dockerfile
 
-      # - name: Linting
-      #   run: docker container run "${IMAGE_NAME}" npm run lint
+      - name: Linting
+        run: docker container run "${IMAGE_NAME}" npm run lint
 
       # - name: Testing
       #   run: docker container run "${IMAGE_NAME}" npm test
